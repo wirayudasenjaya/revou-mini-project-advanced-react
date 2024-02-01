@@ -29,6 +29,16 @@
   text-align: center;
 }
 
+.profile {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.avatar {
+  border: 0px solid;
+  border-radius: 2rem;
+}
+
 @media screen and (max-width: 720px) {
   .layout {
     grid-template-columns: repeat(1, minmax(10px, 1fr));

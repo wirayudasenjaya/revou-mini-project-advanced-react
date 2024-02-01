@@ -20,9 +20,9 @@ const DashboardPage: React.FC = () => {
   };
 
   const handleClick = () => {
-    localStorage.removeItem('recoil-persist');
-    navigate('/');
-  }
+    localStorage.removeItem("recoil-persist");
+    navigate("/");
+  };
 
   return (
     <Layout className="layout">
@@ -34,9 +34,16 @@ const DashboardPage: React.FC = () => {
           options={languageOptions}
         />
         <br />
-        <h1>
-          {t("Hello")}, {user ? user.fullname : ""}
-        </h1>
+        <div className="profile">
+          <img
+            src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${user.fullname}&backgroundColor=a82a22&shapeColor=f1f4dc`}
+            alt="avatar"
+            className="avatar"
+          />
+          <h1>
+            {t("Hello")}, {user.fullname}
+          </h1>
+        </div>
         <Button type="primary" key="console" onClick={() => handleClick()}>
           {t("Back to register")}
         </Button>
