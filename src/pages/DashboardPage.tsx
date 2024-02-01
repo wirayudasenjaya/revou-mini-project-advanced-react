@@ -20,7 +20,7 @@ const DashboardPage: React.FC = () => {
   };
 
   const handleClick = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('recoil-persist');
     navigate('/');
   }
 
