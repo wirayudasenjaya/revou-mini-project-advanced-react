@@ -37,7 +37,7 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log(errorInfo);
   };
 
   const handleChange = (value: string) => {

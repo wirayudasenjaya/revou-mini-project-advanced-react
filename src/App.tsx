@@ -3,10 +3,12 @@ import { ConfigProvider } from "antd";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import { RecoilRoot } from "recoil";
 
 const App: React.FC = () => {
   return (
-    <ConfigProvider
+    <RecoilRoot>
+      <ConfigProvider
       theme={{
         token: {
           colorPrimary: "#a82a22",
@@ -25,6 +27,8 @@ const App: React.FC = () => {
         </Routes>
       </BrowserRouter>
     </ConfigProvider>
+    </RecoilRoot>
+    
   );
 };
 
