@@ -15,7 +15,6 @@ interface RegisterPageProps {}
 
 const RegisterPage: React.FC<RegisterPageProps> = () => {
   const [current, setCurrent] = useState<number>(0);
-  const [formValue, setFormValue] = useState<any>({});
   const [showResult, setShowResult] = useState<boolean>(false);
   const [user, setUser] = useRecoilState<any>(userState);
   const {t, i18n} = useTranslation();
@@ -26,12 +25,10 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
 
   const onFinish = (values: any) => {
     if (current === 2) {
-      // setFormValue((prev: any) => ({ ...prev, ...values }));
       setUser((prev: any) => ({ ...prev, ...values }));
       setShowResult(true);
     } else {
       setCurrent(current + 1);
-      // setFormValue((prev: any) => ({ ...prev, ...values }));
       setUser((prev: any) => ({ ...prev, ...values }));
     }
   };
@@ -52,7 +49,7 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
         </div>
       ) : (
         <>
-          <img src={background} alt="background" className="background" />
+          <img src={background} alt="background" className="background" loading="lazy" />
           <section className="form-box">
             <Select
               defaultValue="en"

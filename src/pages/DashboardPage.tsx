@@ -44,7 +44,7 @@ const DashboardPage: React.FC = () => {
             {t("Hello")}, {user.fullname}
           </h1>
         </div>
-        <Button type="primary" key="console" onClick={() => handleClick()}>
+        <Button type="primary" key="console" onClick={handleClick}>
           {t("Back to register")}
         </Button>
       </div>

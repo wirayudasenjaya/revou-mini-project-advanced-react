@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import "./matchMedia.mock";
 import DashboardPage from "./pages/DashboardPage";
@@ -34,18 +34,29 @@ describe("utility", () => {
   }
 
   test("render register page", () => {
-    render(<RegisterPage />, {wrapper: Wrappers});
+    render(<RegisterPage />, { wrapper: Wrappers });
     const linkElement = screen.getByText(/Personal Information/i);
     expect(linkElement).toBeInTheDocument();
   });
 
   test("render dashboard page", () => {
-    render(<DashboardPage />, {wrapper: Wrappers});
+    render(<DashboardPage />, { wrapper: Wrappers });
     const linkElement = screen.getByText(/Hello/i);
     expect(linkElement).toBeInTheDocument();
   });
 
-  test("input form and press button", () => {
+  test("error if there is empty field", async () => {
+    const { button } = main();
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Please input your full name!/i)
+      ).toBeInTheDocument();
+    });
+  });
+
+  test("input form and press button", async () => {
     const { fullname, email, button } = main();
     fireEvent.change(fullname, { target: { value: "Wirayuda" } });
     fireEvent.change(email, {
@@ -56,8 +67,23 @@ describe("utility", () => {
     const date = document.getElementsByClassName("ant-picker-cell-inner")[15];
     fireEvent.click(date);
     fireEvent.click(button);
-    setTimeout(() => {
+    await waitFor(() => {
       expect(screen.getByText(/Address Information/i)).toBeInTheDocument();
-    }, 3000);
+    });
+  });
+
+  test("change language", async () => {
+    render(<RegisterPage />, { wrapper: Wrappers });
+    const dropdown = document.getElementsByClassName("ant-select-selector")[0];
+    fireEvent.click(dropdown);
+    setTimeout(async () => {
+      const language = document.getElementsByClassName(
+        "ant-select-item-option-content"
+      )[1];
+      fireEvent.click(language);
+      await waitFor(() => {
+        expect(screen.getByText(/Informasi Pribadi/i)).toBeInTheDocument();
+      });
+    }, 1000);
   });
 });
